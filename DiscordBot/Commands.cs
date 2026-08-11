@@ -1,3 +1,5 @@
+using System.Threading.Channels;
+using Discord.Interactions;
 using Discord.WebSocket;
 using DiscordBot.Handler_Classes;
 
@@ -47,5 +49,17 @@ public class Commands
     public static async Task Roll(SocketMessage message)
     {
         await message.Channel.SendMessageAsync($"Random number: {_randomNumber.Next(1, 100)}");
+    }
+
+    public static async Task WelcomeMessage(SocketGuildUser user)
+    {
+        ulong welcomeChannelId = 1472901244128465032; // just general channel
+
+        var channel = user.Guild.GetChannel(welcomeChannelId) as SocketTextChannel;
+
+        if (channel != null)
+        {
+            await channel.SendMessageAsync($"Welcome {user.Mention}, i hope you have the worst time of the day lo, lmao, get good, uwu ig idk");
+        }
     }
 }

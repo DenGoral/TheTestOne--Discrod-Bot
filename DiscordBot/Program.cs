@@ -40,6 +40,8 @@ public class Program
         
         var config = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
         var token = config["DiscordToken"];
+
+        _client.UserJoined += Commands.WelcomeMessage;
         
         await _client.LoginAsync(TokenType.Bot, token);
         await _client.StartAsync();
