@@ -1,6 +1,7 @@
 ﻿using Discord;
 using Discord.WebSocket;
 using DiscordBot.Handler_Classes;
+using Microsoft.Extensions.Configuration;
 
 namespace DiscordBot;
 
@@ -37,7 +38,8 @@ public class Program
         Console.WriteLine("Connected method");
         _client.MessageReceived += MessageHandler.OnMessageReceived;
         
-        var token = File.ReadAllText("token.txt");
+        var config = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
+        var token = config["DiscordToken"];
         
         await _client.LoginAsync(TokenType.Bot, token);
         await _client.StartAsync();
