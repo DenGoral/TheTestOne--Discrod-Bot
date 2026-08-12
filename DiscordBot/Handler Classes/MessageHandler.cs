@@ -46,4 +46,16 @@ public static class MessageHandler
             await handler(message);
         }
     }
+
+    public static async Task WelcomeMessage(SocketGuildUser user)
+    {
+        ulong welcomeChannelId = 1472901244128465032; // just general channel
+
+        var channel = user.Guild.GetChannel(welcomeChannelId) as SocketTextChannel;
+
+        if (channel != null)
+        {
+            await channel.SendMessageAsync($"Welcome {user.Mention}, i hope you have the worst time of the day lo, lmao, get good, uwu ig idk");
+        }
+    }
 }
